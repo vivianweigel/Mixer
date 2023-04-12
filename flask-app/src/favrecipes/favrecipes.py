@@ -5,6 +5,30 @@ from src import db
 
 favrecipes = Blueprint('favrecipes', __name__)
 
+@favrecipes.route('/toprecipes', methods=['GET'])
+def get_top():
+    # get a cursor object from the database
+    cursor = db.get_db().cursor()
+
+    # use cursor to query the database for a list of products
+    cursor.execute('SELECT * FROM Recipes WHERE avg_rating > 4')
+
+    # grab the column headers from the returned data
+    column_headers = [x[0] for x in cursor.description]
+
+    # create an empty dictionary object to use in 
+    # putting column headers together with data
+    json_data = []
+
+    # fetch all the data from the cursor
+    theData = cursor.fetchall()
+
+    # for each of the rows, zip the data elements together with
+    # the column headers. 
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
 # # Get all customers from the DB
 # @favrecipes.route('/favrecipes', methods=['GET'])
 # def get_customers():
