@@ -31,7 +31,8 @@ def get_recipes():
 
     return jsonify(json_data)
 
-@myrecipes.route('/mine', methods=['GET'])
+# Get all the products from the database
+@myrecipes.route('/personal_recipes', methods=['GET'])
 def get_mine():
     # get a cursor object from the database
     cursor = db.get_db().cursor()
