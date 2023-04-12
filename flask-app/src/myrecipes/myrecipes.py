@@ -37,7 +37,7 @@ def get_mine():
     cursor = db.get_db().cursor()
 
     # use cursor to query the database for a list of products
-    cursor.execute('SELECT recipe_name FROM Personal_recipes WHERE user_id = 1')
+    cursor.execute('SELECT recipe_name FROM Personal_recipes WHERE user_id = 6')
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
