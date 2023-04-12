@@ -31,30 +31,30 @@ def get_recipes():
 
     return jsonify(json_data)
 
-# get the top 5 products from the database
-@products.route('/mostExpensive')
-def get_most_pop_products():
-    cursor = db.get_db().cursor()
-    query = '''
-        SELECT product_code, product_name, list_price, reorder_level
-        FROM products
-        ORDER BY list_price DESC
-        LIMIT 5
-    '''
-    cursor.execute(query)
-       # grab the column headers from the returned data
-    column_headers = [x[0] for x in cursor.description]
+# # get the top 5 products from the database
+# @products.route('/mostExpensive')
+# def get_most_pop_products():
+#     cursor = db.get_db().cursor()
+#     query = '''
+#         SELECT product_code, product_name, list_price, reorder_level
+#         FROM products
+#         ORDER BY list_price DESC
+#         LIMIT 5
+#     '''
+#     cursor.execute(query)
+#        # grab the column headers from the returned data
+#     column_headers = [x[0] for x in cursor.description]
 
-    # create an empty dictionary object to use in 
-    # putting column headers together with data
-    json_data = []
+#     # create an empty dictionary object to use in 
+#     # putting column headers together with data
+#     json_data = []
 
-    # fetch all the data from the cursor
-    theData = cursor.fetchall()
+#     # fetch all the data from the cursor
+#     theData = cursor.fetchall()
 
-    # for each of the rows, zip the data elements together with
-    # the column headers. 
-    for row in theData:
-        json_data.append(dict(zip(column_headers, row)))
+#     # for each of the rows, zip the data elements together with
+#     # the column headers. 
+#     for row in theData:
+#         json_data.append(dict(zip(column_headers, row)))
 
-    return jsonify(json_data)
+#     return jsonify(json_data)
