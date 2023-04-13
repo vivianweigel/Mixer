@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, make_response
+from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from src import db
 
@@ -57,6 +57,30 @@ def get_mine():
 
     return jsonify(json_data)
 
+
+# post a new recipe to personal recipes
+@myrecipes.route('/post_recipe', methods=['POST'])
+def post_recipe():
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    name = the_data['recipe_name']
+    skill_level = the_data['skill_level']
+    steps = the_data['steps']
+    category = the_data['category']
+
+    query = 'insert into Recipes(recipe_name, skill_level, steps, category) values ("'
+    query += name + '", "'
+    query += skill_level + '", "'
+    query += steps + '", "'
+    query += category + ')'
+
+    current_app.logger.info(query)
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+    
+    return 'Sucess'
 
 # # get the top 5 products from the database
 # @products.route('/mostExpensive')
