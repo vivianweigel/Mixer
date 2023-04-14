@@ -31,7 +31,6 @@ def get_top():
     return jsonify(json_data)
 
 
-
 @favrecipes.route('/userfaves', methods=['GET'])
 def get_userfaves():
     # get a cursor object from the database
@@ -68,7 +67,7 @@ def post_review():
     rating = the_data['rating']
     comment = the_data['r_comment']
 
-    query = 'insert into Recipe_review(rating, r_comment) values ("'
+    query = 'insert into Recipe_review(rating, r_comment) values ('
     query += str(rating) + '", "'
     query += comment + ')'
 
@@ -104,17 +103,50 @@ def post_rating():
     current_app.logger.info(the_data)
 
     rating = the_data['rating']
+    recipe_id = the_data['recipe_id']
 
-    query = 'insert into Recipe_review(rating) values ('
-    query += int(rating) + ')'
+    query = 'INSERT INTO Recipe_review(recipe_id, rating) VALUES ('
+    query += recipe_id + '","'
+    query += rating + ')'
 
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()
     
-    return 'Sucess'
+    return 'Success'
 
+
+# put request to update average rating when new ratings are added ???
+
+@favrecipes.route('/update_rating/<int:recipe_id>', methods=['PUT'])
+def update_rating(recipe_id):
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    new_rating = the_data['new_rating']
+    cursor = db.get_db().cursor()
+
+    # Get the current rating and number of ratings for the recipe
+    cursor.execute('SELECT AVG(rating), COUNT(*) FROM Recipe_review WHERE recipe_id = %s', (recipe_id,))
+    result = cursor.fetchone()
+    current_rating = result[0]
+    num_ratings = result[1]
+
+    # Calculate the new average rating
+    if num_ratings == 0:
+        new_avg_rating = new_rating
+    else:
+        new_avg_rating = (current_rating * num_ratings + new_rating) / (num_ratings + 1)
+
+    # Update the rating in the database
+    cursor.execute('UPDATE Recipe SET rating = %s WHERE recipe_id = %s', (new_avg_rating, recipe_id))
+    db.get_db().commit()
+
+    return 'Success'
+
+
+# how to go about unfavoriting a recipe ???
 
 # work on this
 @favrecipes.route('/delete_rating', methods=['DELETE'])
