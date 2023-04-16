@@ -158,6 +158,56 @@ def delete_rating():
 
     return 'Success'
 
+@favrecipes.route('/add_to_fav', methods = ['POST'])
+def add_to_fav():
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    recipe_id = the_data['recipe_id']
+    user_id = 6
+
+    query2 = 'insert into Users_fav_rec(recipe_id, user_id) values ("'
+    query2 += str(recipe_id) + '", "'
+    query2 += str(user_id) + '")'
+
+    current_app.logger.info(query2)
+    cursor = db.get_db().cursor()
+    cursor.execute(query2)
+    db.get_db().commit()
+    
+    return 'Sucess'
+
+@favrecipes.route('/view_rec_stats', methods = ['GET'])
+def view_rec_stats():
+    # get a cursor object from the database
+    cursor = db.get_db().cursor()
+
+    the_data = request.json
+    recipe_id = the_data['recipe_id']
+
+    query = 'SELECT * FROM Recipe_review WHERE recipe_id = '
+    query += str(recipe_id)
+    # use cursor to query the database for a list of products
+    cursor.execute(query)
+
+    # grab the column headers from the returned data
+    column_headers = [x[0] for x in cursor.description]
+
+    # create an empty dictionary object to use in 
+    # putting column headers together with data
+    json_data = []
+
+    # fetch all the data from the cursor
+    theData = cursor.fetchall()
+
+    # for each of the rows, zip the data elements together with
+    # the column headers. 
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
+
+
 # # Get all customers from the DB
 # @favrecipes.route('/favrecipes', methods=['GET'])
 # def get_customers():
