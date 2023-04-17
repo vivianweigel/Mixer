@@ -36,9 +36,14 @@ def get_userfaves():
     # get a cursor object from the database
     cursor = db.get_db().cursor()
 
+    the_data = request.json
+    user_id = the_data['user_id']
+
     # use cursor to query the database for a list of products
     # TRY TO USE A USER_ID THAT THE USER INPUTS
-    cursor.execute('SELECT r.recipe_name, recipe_author, category, avg_rating, skill_level, steps FROM Favorite_recipes f join Users_fav_rec u on f.recipe_id = u.recipe_id join Recipes r on r.recipe_id = u.recipe_id WHERE user_id = 144')
+    query = 'SELECT r.recipe_name, recipe_author, category, avg_rating, skill_level, steps FROM Favorite_recipes f join Users_fav_rec u on f.recipe_id = u.recipe_id join Recipes r on r.recipe_id = u.recipe_id WHERE user_id = '
+    query += user_id
+    cursor.execute(query)
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
