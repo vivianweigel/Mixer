@@ -168,8 +168,8 @@ def add_to_fav():
     the_data = request.json
     current_app.logger.info(the_data)
 
-    recipe_id = the_data['recipe_id']
-    user_id = 6
+    recipe_id = the_data[0]['recipe_id']
+    user_id = the_data[1]
 
     query2 = 'insert into Users_fav_rec(recipe_id, user_id) values ("'
     query2 += str(recipe_id) + '", "'
@@ -180,7 +180,7 @@ def add_to_fav():
     cursor.execute(query2)
     db.get_db().commit()
     
-    return 'Sucess'
+    return str(recipe_id) + ' ' + str(user_id)
 
 @favrecipes.route('/view_rec_stats', methods = ['GET'])
 def view_rec_stats():
