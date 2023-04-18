@@ -211,3 +211,36 @@ def delete_recipe():
     db.get_db().commit()
 
     return 'Success'
+
+# filter for category
+@myrecipes.route('/get_category', methods=['GET'])
+def get_category():
+    # get a cursor object from the database
+    cursor = db.get_db().cursor()
+
+    # getting data
+    the_data = request.json
+
+    # creating query
+    query = 'SELECT * FROM Recipes WHERE category = "'
+    query += the_data + '"'
+
+    # use cursor to query the database for a list of products
+    cursor.execute(query)
+
+    # grab the column headers from the returned data
+    column_headers = [x[0] for x in cursor.description]
+
+    # create an empty dictionary object to use in 
+    # putting column headers together with data
+    json_data = []
+
+    # fetch all the data from the cursor
+    theData = cursor.fetchall()
+
+    # for each of the rows, zip the data elements together with
+    # the column headers. 
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
