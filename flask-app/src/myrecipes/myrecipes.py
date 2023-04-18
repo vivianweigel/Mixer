@@ -38,8 +38,12 @@ def get_nutritional_info():
     # get a cursor object from the database
     cursor = db.get_db().cursor()
 
-    # use cursor to query the database for a list of products
-    cursor.execute('SELECT * FROM Nutritional_info')
+    the_data = request.json
+    ingredient_name = the_data['ingredient_name']
+
+    query = 'SELECT * FROM Nutritional_info WHERE ingredient_name = '
+    query += str(ingredient_name)
+    cursor.execute(query)
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
