@@ -135,28 +135,6 @@ def update_rating(recipe_id):
 
     return 'Success'
 
-
-# how to go about unfavoriting a recipe ???
-
-# work on this
-@favrecipes.route('/delete_rating', methods=['DELETE'])
-def delete_rating():
-
-    the_data = request.json
-    current_app.logger.info(the_data)
-
-    recipe_id = the_data['recipe_id']
-    cursor = db.get_db().cursor()
-
-    query = 'DELETE FROM Recipe_review WHERE id = '
-    query += recipe_id
-
-   # cursor = db.get_db().cursor()
-    cursor.execute(query)
-    db.get_db().commit()
-
-    return 'Success'
-
 @favrecipes.route('/add_to_fav', methods = ['POST'])
 def add_to_fav():
     the_data = request.json
