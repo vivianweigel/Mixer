@@ -120,7 +120,8 @@ def update_rating():
 
     # Get the current rating and number of ratings for the recipe
     query = 'UPDATE Recipes SET avg_rating = (SElECT AVG(rating) FROM Recipe_review GROUP BY recipe_id HAVING recipe_id = '
-    query += str(recipe_id) + ')'
+    query += str(recipe_id) + ') WHERE recipe_id = '
+    query += str(recipe_id) 
 
     cursor.execute(query)
 
