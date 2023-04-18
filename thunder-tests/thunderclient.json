@@ -60,12 +60,12 @@
     "method": "PUT",
     "sortNum": 60000,
     "created": "2023-04-18T23:03:17.984Z",
-    "modified": "2023-04-18T23:05:17.062Z",
+    "modified": "2023-04-18T23:13:52.163Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \n}",
+      "raw": "[12, \"new pizza\", {\n  \"recipe_name\": \"Pizza\"\n}]",
       "form": []
     },
     "tests": []
