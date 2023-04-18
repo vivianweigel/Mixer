@@ -37,7 +37,7 @@ def get_userfaves():
     cursor = db.get_db().cursor()
 
     the_data = request.json
-    user_id = the_data['user_id']
+    user_id = str(the_data)
 
     # use cursor to query the database for a list of products
     # TRY TO USE A USER_ID THAT THE USER INPUTS
