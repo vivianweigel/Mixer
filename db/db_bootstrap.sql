@@ -66,8 +66,8 @@ CREATE TABLE Recipes (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE Personal_recipes (
-    recipe_id INTEGER PRIMARY KEY,
-    recipe_name VARCHAR(100),
+    recipe_id INTEGER,
+    recipe_name VARCHAR(100) PRIMARY KEY,
     date_added DATETIME DEFAULT CURRENT_TIMESTAMP,
     user_id INTEGER,
     verified ENUM('yes', 'no'),

@@ -132,11 +132,13 @@ def get_mine():
 def post_recipe():
     the_data = request.json
     current_app.logger.info(the_data)
+    row = the_data[0]
+
     # getting data
-    name = the_data[0]['recipe_name']
-    skill_level = the_data[0]['skill_level']
-    steps = the_data[0]['steps']
-    category = the_data[0]['category']
+    name = row['recipe_name']
+    skill_level = row['skill_level']
+    steps = row['steps']
+    category = row['category']
 
     # writing query to insert data into recipes
     query = 'insert into Recipes(recipe_name, skill_level, steps, category) values ("'
@@ -151,17 +153,11 @@ def post_recipe():
     cursor.execute(query)
     db.get_db().commit()
 
-    # Writing query to get new recipe id
-    query2 = 'SELECT recipe_id FROM Recipes WHERE recipe_name = '
-    query2 += name
-    recipe_id = cursor.execute(query2)
-
     # writing query to add recipe to their personal recipes
-    query3 = 'insert into Personal_recipes(recipe_name, user_id, recipe_id) values ("'
-    query3 += name + '", "'
-    query3 += str(the_data[1]) + '", "'
-    query3 += str(recipe_id) + '")'
-    cursor.execute(query3)
+    query2 = 'insert into Personal_recipes(recipe_name, user_id) values ("'
+    query2 += name + '", "'
+    query2 += str(the_data[1]) + '")'
+    cursor.execute(query2)
     db.get_db().commit()
     
     return 'Success'
