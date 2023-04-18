@@ -41,7 +41,7 @@ def get_userfaves():
 
     # use cursor to query the database for a list of products
     # TRY TO USE A USER_ID THAT THE USER INPUTS
-    query = 'SELECT r.recipe_name, recipe_author, category, avg_rating, skill_level, steps FROM Favorite_recipes f join Users_fav_rec u on f.recipe_id = u.recipe_id join Recipes r on r.recipe_id = u.recipe_id WHERE user_id = '
+    query = 'SELECT r.recipe_name, recipe_author, category, avg_rating, skill_level, r.recipe_id, steps FROM Favorite_recipes f join Users_fav_rec u on f.recipe_id = u.recipe_id join Recipes r on r.recipe_id = u.recipe_id WHERE user_id = '
     query += user_id
     cursor.execute(query)
 
@@ -68,20 +68,23 @@ def post_review():
     the_data = request.json
     current_app.logger.info(the_data)
 
-    # photo = the_data[''] ???
-    rating = the_data['rating']
-    comment = the_data['r_comment']
+    recipe_id = the_data[0]["recipe_id"]
+    rating = the_data[1]
+    comment = the_data[2]
+    user_id = the_data[3]
 
-    query = 'insert into Recipe_review(rating, r_comment) values ('
+    query = 'insert into Recipe_review(recipe_id, rating, r_comment, user_id) values ("'
+    query += str(recipe_id) + '", "'
     query += str(rating) + '", "'
-    query += comment + ')'
+    query += comment + '", "'
+    query += str(user_id) + '")'
 
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()
     
-    return 'Sucess'
+    return 'Success'
 
 
 @favrecipes.route('/post_comment', methods=['POST'])
