@@ -31,5 +31,43 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "1d83ba4f-dd13-4b8e-bbc7-ee13f6c63aca",
+    "colId": "b2cc28a5-82b3-46ba-84aa-199f311713e9",
+    "containerId": "",
+    "name": "post recipe test",
+    "url": "localhost:8001/m/post_recipe",
+    "method": "POST",
+    "sortNum": 40000,
+    "created": "2023-04-18T22:59:17.208Z",
+    "modified": "2023-04-18T23:02:28.453Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[{\n  \"recipe_name\": \"Pizza\",\n  \"skill_level\": \"Intermediate\",\n\t\"category\": \"italian\",\n  \"steps\": \"get dough, roll, put on sauce and cheese and toppings, bake in the oven, enjoy\"\t\n}, 12]",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "e48f7ac7-645e-42f2-b2bd-2104702bf87d",
+    "colId": "b2cc28a5-82b3-46ba-84aa-199f311713e9",
+    "containerId": "",
+    "name": "put update name test",
+    "url": "localhost:8001/m/update_name",
+    "method": "PUT",
+    "sortNum": 60000,
+    "created": "2023-04-18T23:03:17.984Z",
+    "modified": "2023-04-18T23:05:17.062Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \n}",
+      "form": []
+    },
+    "tests": []
   }
 ]
