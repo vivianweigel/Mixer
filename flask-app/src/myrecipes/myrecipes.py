@@ -104,8 +104,8 @@ def get_mine():
 
     # use cursor to query the database for a list of products
     # TRY TO USE A USER_ID THAT THE USER INPUTS
-    query = 'SELECT recipe_name FROM Personal_recipes WHERE user_id = '
-    query += user_id
+    query = 'SELECT recipe_name FROM Personal_recipes WHERE user_id = "'
+    query += user_id + '"'
     cursor.execute(query)
 
     # grab the column headers from the returned data
@@ -164,6 +164,7 @@ def post_recipe():
     query2 += str(the_data[1]) + '", "'
     query2 += str(rec_id) + '")'
     cursor.execute(query2)
+    current_app.logger.info(query)
     db.get_db().commit()
     
     return 'Success'
