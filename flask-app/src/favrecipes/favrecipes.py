@@ -96,11 +96,12 @@ def delete_rating():
     user_id = the_data['user_id']
     cursor = db.get_db().cursor()
 
-    query = 'DELETE FROM Recipe_review WHERE recipe_id = '
-    query += recipe_id
-    query += 'AND user_id = '
-    query += user_id
+    query = 'DELETE FROM Recipe_review WHERE recipe_id = "'
+    query += str(recipe_id)
+    query += '" AND user_id = "'
+    query += str(user_id) + '"'
     
+    cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()
 
