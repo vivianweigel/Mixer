@@ -151,7 +151,6 @@ def post_recipe():
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
     cursor.execute(query)
-    db.get_db().commit()
 
     # write a query to get rec id
     query3 = 'SELECT recipe_id FROM Recipes WHERE recipe_name = "'

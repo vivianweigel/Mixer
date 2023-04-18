@@ -110,28 +110,20 @@ def delete_rating():
 
 # put request to update average rating when new ratings are added ???
 
-@favrecipes.route('/update_rating/<int:recipe_id>', methods=['PUT'])
-def update_rating(recipe_id):
+@favrecipes.route('/update_rating', methods=['PUT'])
+def update_rating():
     the_data = request.json
     current_app.logger.info(the_data)
 
-    new_rating = the_data['new_rating']
+    recipe_id = the_data['recipe_id']
     cursor = db.get_db().cursor()
 
     # Get the current rating and number of ratings for the recipe
-    cursor.execute('SELECT AVG(rating), COUNT(*) FROM Recipe_review WHERE recipe_id = %s', (recipe_id,))
-    result = cursor.fetchone()
-    current_rating = result[0]
-    num_ratings = result[1]
+    query = 'UPDATE Recipes SET avg_rating = (SElECT AVG(rating) FROM Recipe_review GROUP BY recipe_id HAVING recipe_id = '
+    query += str(recipe_id) + ')'
 
-    # Calculate the new average rating
-    if num_ratings == 0:
-        new_avg_rating = new_rating
-    else:
-        new_avg_rating = (current_rating * num_ratings + new_rating) / (num_ratings + 1)
+    cursor.execute(query)
 
-    # Update the rating in the database
-    cursor.execute('UPDATE Recipe SET rating = %s WHERE recipe_id = %s', (new_avg_rating, recipe_id))
     db.get_db().commit()
 
     return 'Success'
