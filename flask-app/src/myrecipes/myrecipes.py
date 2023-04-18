@@ -61,11 +61,16 @@ def get_nutritional_info():
 # Get all the products from the database
 @myrecipes.route('/ingredients', methods=['GET'])
 def get_ingredients():
-    # get a cursor object from the database
+     # get a cursor object from the database
     cursor = db.get_db().cursor()
 
+    the_data = request.json
+    recipe_id = the_data['recipe_id']
+
+    query = 'SELECT * FROM Ingredients WHERE recipe_id = '
+    query += str(recipe_id)
     # use cursor to query the database for a list of products
-    cursor.execute('SELECT * FROM Ingredients')
+    cursor.execute(query)
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
