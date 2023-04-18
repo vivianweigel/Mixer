@@ -41,8 +41,8 @@ def get_nutritional_info():
     the_data = request.json
     ingredient_name = the_data['ingredient_name']
 
-    query = 'SELECT * FROM Nutritional_info WHERE ingredient_name = '
-    query += str(ingredient_name)
+    query = 'SELECT * FROM Nutritional_info WHERE ingredient_name = "'
+    query += str(ingredient_name) + '"'
     cursor.execute(query)
 
     # grab the column headers from the returned data
@@ -153,10 +153,16 @@ def post_recipe():
     cursor.execute(query)
     db.get_db().commit()
 
+    # write a query to get rec id
+    query3 = 'SELECT recipe_id FROM Recipes WHERE recipe_name = "'
+    query3 += name + '"'
+    rec_id = cursor.execute(query3)
+
     # writing query to add recipe to their personal recipes
-    query2 = 'insert into Personal_recipes(recipe_name, user_id) values ("'
+    query2 = 'insert into Personal_recipes(recipe_name, user_id, recipe_id) values ("'
     query2 += name + '", "'
-    query2 += str(the_data[1]) + '")'
+    query2 += str(the_data[1]) + '", "'
+    query2 += str(rec_id) + '")'
     cursor.execute(query2)
     db.get_db().commit()
     

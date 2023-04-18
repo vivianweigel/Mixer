@@ -67,10 +67,11 @@ CREATE TABLE Recipes (
 
 CREATE TABLE Personal_recipes (
     recipe_id INTEGER,
-    recipe_name VARCHAR(100) PRIMARY KEY,
+    recipe_name VARCHAR(100),
     date_added DATETIME DEFAULT CURRENT_TIMESTAMP,
     user_id INTEGER,
     verified ENUM('yes', 'no'),
+    PRIMARY KEY (recipe_id, user_id),
     FOREIGN KEY (recipe_id) REFERENCES Recipes(recipe_id)
             ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
