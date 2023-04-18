@@ -190,3 +190,24 @@ def update_amount():
     db.get_db().commit()
 
     return 'Success'
+
+@myrecipes.route('/delete_recipe', methods=['DELETE'])
+def delete_recipe():
+
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    user_id = the_data[0]
+    name = the_data[1]['recipe_name']
+    cursor = db.get_db().cursor()
+
+    query = 'DELETE FROM Personal_recipes WHERE user_id = '
+    query += str(user_id)
+    query += ' AND recipe_name = "'
+    query += str(name) + '"'
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    return 'Success'
