@@ -60,7 +60,7 @@ def get_nutritional_info():
 
 # Get all the products from the database
 @myrecipes.route('/ingredients', methods=['GET'])
-def get_ngredients():
+def get_ingredients():
     # get a cursor object from the database
     cursor = db.get_db().cursor()
 
