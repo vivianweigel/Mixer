@@ -96,11 +96,17 @@ def get_ingredients():
 # Get all the products from the database
 @myrecipes.route('/personal_recipes', methods=['GET'])
 def get_mine():
-    # get a cursor object from the database
+
     cursor = db.get_db().cursor()
 
+    the_data = request.json
+    user_id = str(the_data)
+
     # use cursor to query the database for a list of products
-    cursor.execute('SELECT recipe_name FROM Personal_recipes WHERE user_id = 6')
+    # TRY TO USE A USER_ID THAT THE USER INPUTS
+    query = 'SELECT recipe_name FROM Personal_recipes WHERE user_id = '
+    query += user_id
+    cursor.execute(query)
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
@@ -120,6 +126,7 @@ def get_mine():
     return jsonify(json_data)
 
 
+
 # post a new recipe to personal recipes
 @myrecipes.route('/post_recipe', methods=['POST'])
 def post_recipe():
@@ -135,14 +142,15 @@ def post_recipe():
     query += name + '", "'
     query += skill_level + '", "'
     query += steps + '", "'
-    query += category + ')'
+    query += category + '")'
 
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()
     
-    return 'Sucess'
+    return 'Success'
+
 
 # # get the top 5 products from the database
 # @products.route('/mostExpensive')
