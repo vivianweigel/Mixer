@@ -86,42 +86,24 @@ def post_review():
     
     return 'Success'
 
+@favrecipes.route('/delete_rating', methods=['DELETE'])
+def delete_rating():
 
-@favrecipes.route('/post_comment', methods=['POST'])
-def post_comment():
     the_data = request.json
     current_app.logger.info(the_data)
 
-    comment = the_data['r_comment']
-
-    query = 'insert into Recipe_review(r_comment) values ("'
-    query += comment + ')'
-
-    current_app.logger.info(query)
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    db.get_db().commit()
-    
-    return 'Sucess'
-
-
-@favrecipes.route('/post_rating', methods=['POST'])
-def post_rating():
-    the_data = request.json
-    current_app.logger.info(the_data)
-
-    rating = the_data['rating']
     recipe_id = the_data['recipe_id']
-
-    query = 'INSERT INTO Recipe_review(recipe_id, rating) VALUES ('
-    query += recipe_id + '","'
-    query += rating + ')'
-
-    current_app.logger.info(query)
+    user_id = the_data['user_id']
     cursor = db.get_db().cursor()
+
+    query = 'DELETE FROM Recipe_review WHERE recipe_id = '
+    query += recipe_id
+    query += 'AND user_id = '
+    query += user_id
+    
     cursor.execute(query)
     db.get_db().commit()
-    
+
     return 'Success'
 
 
