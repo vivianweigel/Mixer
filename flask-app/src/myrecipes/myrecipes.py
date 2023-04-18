@@ -169,19 +169,21 @@ def post_recipe():
     return 'Success'
 
 
-@myrecipes.route('/update_amount', methods=['PUT'])
+@myrecipes.route('/update_name', methods=['PUT'])
 def update_amount():
     the_data = request.json
     current_app.logger.info(the_data)
 
-    recipe_id = the_data['recipe_id']
-    ingredient_name = the_data['ingredient_name']
+    user_id = the_data[0]
+    new_name = the_data[1]
+    curr_name = the_data[2]['recipe_name']
     cursor = db.get_db().cursor()
 
     # Get the current rating and number of ratings for the recipe
-    query = 'UPDATE Ingredients SET amount = (SElECT count() FROM Ingredients WHERE recipe_id = '
-    query += str(recipe_id) + 'AND ingredient_name = '
-    query += str(ingredient_name)
+    query = 'UPDATE Personal_recipes SET recipe_name = "'
+    query += new_name + '" WHERE recipe_name = "'
+    query += curr_name + '" AND user_id = '
+    query += str(user_id)
 
     cursor.execute(query)
 
