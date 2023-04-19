@@ -5,13 +5,13 @@ from src import db
 
 myrecipes = Blueprint('myrecipes', __name__)
 
-# Get all the products from the database
+# Gets all the recipes from the database
 @myrecipes.route('/recipes', methods=['GET'])
 def get_recipes():
     # get a cursor object from the database
     cursor = db.get_db().cursor()
 
-    # use cursor to query the database for a list of products
+    # use cursor to query the database for a list of recipes
     cursor.execute('SELECT * FROM Recipes')
 
     # grab the column headers from the returned data
@@ -32,7 +32,7 @@ def get_recipes():
     return jsonify(json_data)
 
 
-# Get all the products from the database
+# Gets all the nutritional info from the database
 @myrecipes.route('/nutritional_info', methods=['GET'])
 def get_nutritional_info():
     # get a cursor object from the database
@@ -62,7 +62,7 @@ def get_nutritional_info():
 
     return jsonify(json_data)
  
-# Get all the products from the database
+# Gets all the ingredients from the database
 @myrecipes.route('/ingredients', methods=['GET'])
 def get_ingredients():
      # get a cursor object from the database
@@ -73,7 +73,7 @@ def get_ingredients():
 
     query = 'SELECT * FROM Ingredients WHERE recipe_id = '
     query += str(recipe_id)
-    # use cursor to query the database for a list of products
+    # use cursor to query the database for a list of ingredients
     cursor.execute(query)
 
     # grab the column headers from the returned data
@@ -93,7 +93,7 @@ def get_ingredients():
 
     return jsonify(json_data)
 
-# Get all the products from the database
+# Gets all the personal recipes from the database
 @myrecipes.route('/personal_recipes', methods=['GET'])
 def get_mine():
 
@@ -102,7 +102,7 @@ def get_mine():
     the_data = request.json
     user_id = str(the_data)
 
-    # use cursor to query the database for a list of products
+    # use cursor to query the database for a list of personal recipes
     # TRY TO USE A USER_ID THAT THE USER INPUTS
     query = 'SELECT recipe_name FROM Personal_recipes WHERE user_id = "'
     query += user_id + '"'
@@ -168,7 +168,7 @@ def post_recipe():
     
     return 'Success'
 
-
+# updates recipe name in personal recipes
 @myrecipes.route('/update_name', methods=['PUT'])
 def update_amount():
     the_data = request.json
@@ -179,7 +179,7 @@ def update_amount():
     curr_name = the_data[2]['recipe_name']
     cursor = db.get_db().cursor()
 
-    # Get the current rating and number of ratings for the recipe
+    # Get the current name of the recipe
     query = 'UPDATE Personal_recipes SET recipe_name = "'
     query += new_name + '" WHERE recipe_name = "'
     query += curr_name + '" AND user_id = '
@@ -191,6 +191,7 @@ def update_amount():
 
     return 'Success'
 
+# deletes recipe from personal recipes
 @myrecipes.route('/delete_recipe', methods=['DELETE'])
 def delete_recipe():
 
@@ -225,7 +226,7 @@ def get_category():
     query = 'SELECT * FROM Recipes WHERE category = "'
     query += the_data + '"'
 
-    # use cursor to query the database for a list of products
+    # use cursor to query the database for a list of categories
     cursor.execute(query)
 
     # grab the column headers from the returned data

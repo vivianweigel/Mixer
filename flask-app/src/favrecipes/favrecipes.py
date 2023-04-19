@@ -5,12 +5,13 @@ from src import db
 
 favrecipes = Blueprint('favrecipes', __name__)
 
+# Gets all the top recipes with rating of 5 from database 
 @favrecipes.route('/toprecipes', methods=['GET'])
 def get_top():
     # get a cursor object from the database
     cursor = db.get_db().cursor()
 
-    # use cursor to query the database for a list of products
+    # use cursor to query the database for a list of top recipes
     cursor.execute('SELECT * FROM Recipes WHERE avg_rating > 4')
 
     # grab the column headers from the returned data
@@ -30,7 +31,7 @@ def get_top():
 
     return jsonify(json_data)
 
-
+# Gets all the users favorited recipes in the database
 @favrecipes.route('/userfaves', methods=['GET'])
 def get_userfaves():
     # get a cursor object from the database
@@ -39,7 +40,7 @@ def get_userfaves():
     the_data = request.json
     user_id = str(the_data)
 
-    # use cursor to query the database for a list of products
+    # use cursor to query the database for a list of favorite recipes
     # TRY TO USE A USER_ID THAT THE USER INPUTS
     query = 'SELECT r.recipe_name, recipe_author, category, avg_rating, skill_level, r.recipe_id, steps FROM Favorite_recipes f join Users_fav_rec u on f.recipe_id = u.recipe_id join Recipes r on r.recipe_id = u.recipe_id WHERE user_id = '
     query += user_id
@@ -62,7 +63,7 @@ def get_userfaves():
 
     return jsonify(json_data)
 
-
+# Posts recipe
 @favrecipes.route('/post_review', methods=['POST'])
 def post_review():
     the_data = request.json
@@ -86,6 +87,7 @@ def post_review():
     
     return 'Success'
 
+# Deletes rating 
 @favrecipes.route('/delete_rating', methods=['DELETE'])
 def delete_rating():
 
@@ -108,7 +110,7 @@ def delete_rating():
     return 'Success'
 
 
-# put request to update average rating when new ratings are added ???
+# put request to update average rating when new ratings are added 
 
 @favrecipes.route('/update_rating', methods=['PUT'])
 def update_rating():
@@ -129,6 +131,7 @@ def update_rating():
 
     return 'Success'
 
+# Adds recipe to favorites 
 @favrecipes.route('/add_to_fav', methods = ['POST'])
 def add_to_fav():
     the_data = request.json
@@ -148,6 +151,7 @@ def add_to_fav():
     
     return str(recipe_id) + ' ' + str(user_id)
 
+# Gets all recipe stats in the database 
 @favrecipes.route('/view_rec_stats', methods = ['GET'])
 def view_rec_stats():
     # get a cursor object from the database
@@ -158,7 +162,7 @@ def view_rec_stats():
 
     query = 'SELECT * FROM Recipe_review WHERE recipe_id = '
     query += str(recipe_id)
-    # use cursor to query the database for a list of products
+    # use cursor to query the database for a list of stats
     cursor.execute(query)
 
     # grab the column headers from the returned data
@@ -178,6 +182,7 @@ def view_rec_stats():
 
     return jsonify(json_data)
 
+# Gets your rating from the database
 @favrecipes.route('/get_my_ratings', methods = ['GET'])
 def get_my_rating():
     # get a cursor object from the database
@@ -188,7 +193,7 @@ def get_my_rating():
 
     query = 'SELECT * FROM Recipe_review WHERE user_id = '
     query += str(the_data)
-    # use cursor to query the database for a list of products
+    # use cursor to query the database for a list of ratings
     cursor.execute(query)
 
     # grab the column headers from the returned data
