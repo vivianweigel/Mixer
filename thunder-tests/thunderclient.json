@@ -41,12 +41,12 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2023-04-18T22:59:17.208Z",
-    "modified": "2023-04-18T23:02:28.453Z",
+    "modified": "2023-04-19T15:29:34.056Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "[{\n  \"recipe_name\": \"Pizza\",\n  \"skill_level\": \"Intermediate\",\n\t\"category\": \"italian\",\n  \"steps\": \"get dough, roll, put on sauce and cheese and toppings, bake in the oven, enjoy\"\t\n}, 12]",
+      "raw": "[{\n  \"recipe_name\": \"Pizza\",\n  \"skill_level\": \"Intermediate\",\n\t\"category\": \"italian\",\n  \"steps\": \"get dough, roll, put on sauce and cheese and toppings, bake in the oven, enjoy\"\t\n}, 103]",
       "form": []
     },
     "tests": []
@@ -212,12 +212,12 @@
     "method": "GET",
     "sortNum": 39375,
     "created": "2023-04-18T23:56:36.759Z",
-    "modified": "2023-04-19T01:19:27.885Z",
+    "modified": "2023-04-19T15:23:54.206Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"user_id\": 117\n}",
+      "raw": "22",
       "form": []
     },
     "tests": []
@@ -231,12 +231,12 @@
     "method": "GET",
     "sortNum": 100000,
     "created": "2023-04-19T00:08:39.217Z",
-    "modified": "2023-04-19T01:09:52.783Z",
+    "modified": "2023-04-19T15:24:51.342Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n \"category\": \"chinese\"\n}",
+      "raw": "\"chinese\"",
       "form": []
     },
     "tests": []
@@ -283,12 +283,12 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2023-04-19T00:22:30.684Z",
-    "modified": "2023-04-19T01:06:30.443Z",
+    "modified": "2023-04-19T15:34:17.942Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "[{\n  \"recipe_id\": 12,\n  \"rating\": 5,\n  \"r_commment\": \"This is an amazing recipe, I would definitely reccommend this to anyone\"\n}, 12]",
+      "raw": "[{\n\"avg_rating\":3.66667,\n\"category\":\"mediterranean\",\n\"recipe_author\":\"Jordana Welbourn\",\n\"recipe_id\":31,\n\"recipe_name\":\"accumsan\",\n\"skill_level\":\"Pro\",\n\"steps\":\"Maecenas leo odio, c...\"\n}, 4, \"Really enjoyed this recipe.\", 22]",
       "form": []
     },
     "tests": []
@@ -492,12 +492,12 @@
     "method": "GET",
     "sortNum": 39687.5,
     "created": "2023-04-19T01:08:01.413Z",
-    "modified": "2023-04-19T01:08:19.965Z",
+    "modified": "2023-04-19T15:24:07.452Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"user_id\": 12\n}",
+      "raw": "12",
       "form": []
     },
     "tests": []
@@ -517,6 +517,82 @@
     "body": {
       "type": "json",
       "raw": "12",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "dab99277-1410-4479-b453-2e5cb6781619",
+    "colId": "b2cc28a5-82b3-46ba-84aa-199f311713e9",
+    "containerId": "",
+    "name": "get category test 2",
+    "url": "localhost:8001/m/get_category",
+    "method": "GET",
+    "sortNum": 110000,
+    "created": "2023-04-19T15:24:58.644Z",
+    "modified": "2023-04-19T15:25:24.499Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "\"french\"",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "56e08558-384b-4279-bb37-9c31c369020a",
+    "colId": "b2cc28a5-82b3-46ba-84aa-199f311713e9",
+    "containerId": "",
+    "name": "get nutritional info test 3",
+    "url": "localhost:8001/m/nutritional_info",
+    "method": "GET",
+    "sortNum": 36250,
+    "created": "2023-04-19T15:26:12.658Z",
+    "modified": "2023-04-19T15:26:24.626Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"ingredient_name\": \"milk\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "c486ffd5-78dc-4a52-8503-adfb03f99300",
+    "colId": "138aa08f-b668-44b7-82f5-4e60a21c4251",
+    "containerId": "",
+    "name": "post review test 2",
+    "url": "localhost:8001/f/post_review",
+    "method": "POST",
+    "sortNum": 45000,
+    "created": "2023-04-19T15:31:23.799Z",
+    "modified": "2023-04-19T15:35:19.487Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[{\n\"avg_rating\":1,\n\"recipe_id\":30,\n\"recipe_name\":\"chicken fries\",\n\"skill_level\":\"Pro\",\n\"steps\":\"boil\"\n}, 2, \"fine.\", 99]",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "35d40617-9df9-453a-b263-67e3d114bd1e",
+    "colId": "138aa08f-b668-44b7-82f5-4e60a21c4251",
+    "containerId": "",
+    "name": "post review test 3",
+    "url": "localhost:8001/f/post_review",
+    "method": "POST",
+    "sortNum": 47500,
+    "created": "2023-04-19T15:35:29.898Z",
+    "modified": "2023-04-19T15:36:00.320Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[{\"recipe_id\":10}, 5, \"Wow\", 99]",
       "form": []
     },
     "tests": []
