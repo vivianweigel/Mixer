@@ -212,12 +212,12 @@
     "method": "GET",
     "sortNum": 39375,
     "created": "2023-04-18T23:56:36.759Z",
-    "modified": "2023-04-19T00:07:58.544Z",
+    "modified": "2023-04-19T01:19:27.885Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"user_id\": 55\n}",
+      "raw": "{\n  \"user_id\": 117\n}",
       "form": []
     },
     "tests": []
@@ -231,12 +231,292 @@
     "method": "GET",
     "sortNum": 100000,
     "created": "2023-04-19T00:08:39.217Z",
-    "modified": "2023-04-19T00:13:38.635Z",
+    "modified": "2023-04-19T01:09:52.783Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n \"label\": \"chinese\",\n \"value\": \"chinese\"\n}",
+      "raw": "{\n \"category\": \"chinese\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "a4663f0d-2b78-49ef-a166-40f31901e2d3",
+    "colId": "138aa08f-b668-44b7-82f5-4e60a21c4251",
+    "containerId": "",
+    "name": "get top recipes test",
+    "url": "localhost:8001/f/toprecipes",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2023-04-19T00:15:52.122Z",
+    "modified": "2023-04-19T00:17:03.837Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "d227f222-8e3f-4ba6-81cc-01a2ccde0487",
+    "colId": "138aa08f-b668-44b7-82f5-4e60a21c4251",
+    "containerId": "",
+    "name": "get user fav recipes",
+    "url": "localhost:8001/f/userfaves",
+    "method": "GET",
+    "sortNum": 30000,
+    "created": "2023-04-19T00:19:47.907Z",
+    "modified": "2023-04-19T01:11:39.748Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "44",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "58447491-6add-495c-be8f-d99c76a8f389",
+    "colId": "138aa08f-b668-44b7-82f5-4e60a21c4251",
+    "containerId": "",
+    "name": "post review test",
+    "url": "localhost:8001/f/post_review",
+    "method": "POST",
+    "sortNum": 40000,
+    "created": "2023-04-19T00:22:30.684Z",
+    "modified": "2023-04-19T01:06:30.443Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[{\n  \"recipe_id\": 12,\n  \"rating\": 5,\n  \"r_commment\": \"This is an amazing recipe, I would definitely reccommend this to anyone\"\n}, 12]",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "8f6d6c4e-f227-40f1-ab60-bf4109121c55",
+    "colId": "138aa08f-b668-44b7-82f5-4e60a21c4251",
+    "containerId": "",
+    "name": "delete rating test",
+    "url": "localhost:8001/f/delete_rating",
+    "method": "DELETE",
+    "sortNum": 50000,
+    "created": "2023-04-19T00:32:17.368Z",
+    "modified": "2023-04-19T00:37:16.083Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"recipe_id\": 144,\n  \"user_id\": 12\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "ee83c474-bcf2-4faf-8f6f-e3a6494c1698",
+    "colId": "138aa08f-b668-44b7-82f5-4e60a21c4251",
+    "containerId": "",
+    "name": "delete rating test 2",
+    "url": "localhost:8001/f/delete_rating",
+    "method": "DELETE",
+    "sortNum": 60000,
+    "created": "2023-04-19T00:37:24.965Z",
+    "modified": "2023-04-19T00:38:08.026Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"recipe_id\": 114,\n  \"user_id\": 19,\n  \"rating\": 3\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "b1aa3dbe-edf8-40ad-823d-3085d4f0d3ed",
+    "colId": "138aa08f-b668-44b7-82f5-4e60a21c4251",
+    "containerId": "",
+    "name": "put update rating test",
+    "url": "localhost:8001/f/update_rating",
+    "method": "PUT",
+    "sortNum": 70000,
+    "created": "2023-04-19T00:41:26.244Z",
+    "modified": "2023-04-19T00:43:10.263Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"recipe_id\": 23,\n  \"user_id\": 12\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "ae942487-1e2f-4c1f-8530-dc913b9da09f",
+    "colId": "138aa08f-b668-44b7-82f5-4e60a21c4251",
+    "containerId": "",
+    "name": "put update rating test 2",
+    "url": "localhost:8001/f/update_rating",
+    "method": "PUT",
+    "sortNum": 80000,
+    "created": "2023-04-19T00:42:47.534Z",
+    "modified": "2023-04-19T00:42:47.534Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"recipe_id\": 114\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "92a33385-be08-4445-93d8-016a50ff2be9",
+    "colId": "138aa08f-b668-44b7-82f5-4e60a21c4251",
+    "containerId": "",
+    "name": "post add to faves test",
+    "url": "localhost:8001/f/add_to_fav",
+    "method": "POST",
+    "sortNum": 90000,
+    "created": "2023-04-19T00:43:44.127Z",
+    "modified": "2023-04-19T00:51:22.507Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[{\n  \"recipe_id\": 14\n}, 12]",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "969d94a9-193c-483e-b8eb-e3bfd0fdb078",
+    "colId": "138aa08f-b668-44b7-82f5-4e60a21c4251",
+    "containerId": "",
+    "name": "post add to faves test 2",
+    "url": "localhost:8001/f/add_to_fav",
+    "method": "POST",
+    "sortNum": 100000,
+    "created": "2023-04-19T00:51:39.155Z",
+    "modified": "2023-04-19T00:52:25.790Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[{\n  \"recipe_id\": 4,\n  \"cuisine\": \"chinese\"\n}, 85]",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "f5185670-fa23-432e-9265-76e2607b9f5b",
+    "colId": "138aa08f-b668-44b7-82f5-4e60a21c4251",
+    "containerId": "",
+    "name": "get recipe stats test",
+    "url": "localhost:8001/f/view_rec_stats",
+    "method": "GET",
+    "sortNum": 110000,
+    "created": "2023-04-19T00:52:37.101Z",
+    "modified": "2023-04-19T01:17:22.473Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"recipe_id\": 97\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "045ce6e5-5e8e-4865-95ad-493ee894619b",
+    "colId": "138aa08f-b668-44b7-82f5-4e60a21c4251",
+    "containerId": "",
+    "name": "get recipe stats test 2",
+    "url": "localhost:8001/f/view_rec_stats",
+    "method": "GET",
+    "sortNum": 120000,
+    "created": "2023-04-19T00:54:22.168Z",
+    "modified": "2023-04-19T01:17:38.175Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"recipe_id\": 6,\n  \"user_id\": 12\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "7d4695cf-393d-4b5e-a1af-1c241d015bb3",
+    "colId": "138aa08f-b668-44b7-82f5-4e60a21c4251",
+    "containerId": "",
+    "name": "get ratings test",
+    "url": "localhost:8001/f/get_my_ratings",
+    "method": "GET",
+    "sortNum": 130000,
+    "created": "2023-04-19T00:56:17.166Z",
+    "modified": "2023-04-19T01:15:06.503Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "20",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "4fae3e43-45f3-489b-9365-82100a2b258c",
+    "colId": "138aa08f-b668-44b7-82f5-4e60a21c4251",
+    "containerId": "",
+    "name": "get ratings test 2",
+    "url": "localhost:8001/f/get_my_ratings",
+    "method": "GET",
+    "sortNum": 140000,
+    "created": "2023-04-19T00:59:05.872Z",
+    "modified": "2023-04-19T01:15:38.855Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "9",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "35ba118c-66e6-486a-8110-f9114c8e7c69",
+    "colId": "b2cc28a5-82b3-46ba-84aa-199f311713e9",
+    "containerId": "",
+    "name": "get personal recipes test 2",
+    "url": "localhost:8001/m/personal_recipes",
+    "method": "GET",
+    "sortNum": 39687.5,
+    "created": "2023-04-19T01:08:01.413Z",
+    "modified": "2023-04-19T01:08:19.965Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"user_id\": 12\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "56a8d70e-c292-42ce-a3e9-3c852786aaba",
+    "colId": "138aa08f-b668-44b7-82f5-4e60a21c4251",
+    "containerId": "",
+    "name": "get user fav recipes 2",
+    "url": "localhost:8001/f/userfaves",
+    "method": "GET",
+    "sortNum": 35000,
+    "created": "2023-04-19T01:10:30.633Z",
+    "modified": "2023-04-19T01:11:23.529Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "12",
       "form": []
     },
     "tests": []
