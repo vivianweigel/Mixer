@@ -37,6 +37,7 @@ def get_userfaves():
     # get a cursor object from the database
     cursor = db.get_db().cursor()
 
+    #getting data
     the_data = request.json
     user_id = str(the_data)
 
@@ -66,6 +67,7 @@ def get_userfaves():
 # Posts recipe
 @favrecipes.route('/post_review', methods=['POST'])
 def post_review():
+    #getting data
     the_data = request.json
     current_app.logger.info(the_data)
 
@@ -74,12 +76,14 @@ def post_review():
     comment = the_data[2]
     user_id = the_data[3]
 
+    #writing query 
     query = 'insert into Recipe_review(recipe_id, rating, r_comment, user_id) values ("'
     query += str(recipe_id) + '", "'
     query += str(rating) + '", "'
     query += comment + '", "'
     query += str(user_id) + '")'
 
+    #executing query
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -90,7 +94,7 @@ def post_review():
 # Deletes rating 
 @favrecipes.route('/delete_rating', methods=['DELETE'])
 def delete_rating():
-
+    #getting data
     the_data = request.json
     current_app.logger.info(the_data)
 
@@ -98,11 +102,13 @@ def delete_rating():
     user_id = the_data['user_id']
     cursor = db.get_db().cursor()
 
+    #writing query
     query = 'DELETE FROM Recipe_review WHERE recipe_id = "'
     query += str(recipe_id)
     query += '" AND user_id = "'
     query += str(user_id) + '"'
     
+    #executing query
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()
@@ -111,9 +117,9 @@ def delete_rating():
 
 
 # put request to update average rating when new ratings are added 
-
 @favrecipes.route('/update_rating', methods=['PUT'])
 def update_rating():
+    #getting data
     the_data = request.json
     current_app.logger.info(the_data)
 
@@ -134,16 +140,17 @@ def update_rating():
 # Adds recipe to favorites 
 @favrecipes.route('/add_to_fav', methods = ['POST'])
 def add_to_fav():
+    #getting data
     the_data = request.json
     current_app.logger.info(the_data)
 
     recipe_id = the_data[0]['recipe_id']
     user_id = the_data[1]
-
+    #writing query
     query2 = 'insert into Users_fav_rec(recipe_id, user_id) values ("'
     query2 += str(recipe_id) + '", "'
     query2 += str(user_id) + '")'
-
+    #executing query
     current_app.logger.info(query2)
     cursor = db.get_db().cursor()
     cursor.execute(query2)

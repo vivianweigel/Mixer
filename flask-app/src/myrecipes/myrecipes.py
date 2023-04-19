@@ -41,6 +41,7 @@ def get_nutritional_info():
     the_data = request.json
     ingredient_name = the_data['ingredient_name']
 
+    # query to select nutritional info and then executing query
     query = 'SELECT * FROM Nutritional_info WHERE ingredient_name = "'
     query += str(ingredient_name) + '"'
     cursor.execute(query)
@@ -71,6 +72,7 @@ def get_ingredients():
     the_data = request.json
     recipe_id = the_data['recipe_id']
 
+    #writing query to select ingredients 
     query = 'SELECT * FROM Ingredients WHERE recipe_id = '
     query += str(recipe_id)
     # use cursor to query the database for a list of ingredients
@@ -174,6 +176,7 @@ def update_amount():
     the_data = request.json
     current_app.logger.info(the_data)
 
+    #getting data
     user_id = the_data[0]
     new_name = the_data[1]
     curr_name = the_data[2]['recipe_name']
@@ -185,6 +188,7 @@ def update_amount():
     query += curr_name + '" AND user_id = '
     query += str(user_id)
 
+    #execute query
     cursor.execute(query)
 
     db.get_db().commit()
@@ -198,15 +202,18 @@ def delete_recipe():
     the_data = request.json
     current_app.logger.info(the_data)
 
+    #getting data
     user_id = the_data[0]
     name = the_data[1]['recipe_name']
     cursor = db.get_db().cursor()
 
+    # writing query to delete personal recipes
     query = 'DELETE FROM Personal_recipes WHERE user_id = '
     query += str(user_id)
     query += ' AND recipe_name = "'
     query += str(name) + '"'
     
+    #executing query
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()
